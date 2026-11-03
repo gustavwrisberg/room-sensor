@@ -1,0 +1,16 @@
+# ESPHome
+secrets.yaml
+.esphome/
+
+# KiCad
+*.kicad_prl
+*-backups/
+_restore_backup_*/
+.history/
+~*.lck
+*.bak
+fp-info-cache
+
+# Python
+__pycache__/
+*.pyc

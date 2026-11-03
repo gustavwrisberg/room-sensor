@@ -1,0 +1,136 @@
+# Room Sensor Lite - ESPHome config
+# XIAO ESP32C6 + HLK-LD2410C radar + SHT40 (temp/humidity) + BH1750 (light)
+# Optional: SCD40 module (CO2) - uncomment the scd4x block.
+#
+# Flash the first time over USB-C (ESPHome dashboard or web.esphome.io), then OTA.
+# Put your credentials in secrets.yaml (see secrets.example.yaml).
+
+substitutions:
+  name: room-sensor
+  friendly_name: Room Sensor
+  temp_offset: "0.0"        # calibrate against a reference thermometer, e.g. "-1.5"
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+  on_boot:
+    priority: 800
+    then:
+      - output.turn_on: bh1750_dvi      # BH1750 DVI high = out of reset (C12 holds it low at power-up)
+      - output.turn_off: rf_switch_en   # XIAO C6: GPIO3 LOW enables the RF switch
+      - output.turn_off: rf_ant_select  # GPIO14 LOW = onboard ceramic antenna (HIGH = U.FL)
+
+esp32:
+  board: seeed_xiao_esp32c6
+  framework:
+    type: esp-idf
+
+logger:
+
+api:
+  encryption:
+    key: !secret api_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "${name} fallback"
+
+captive_portal:
+
+output:
+  - { platform: gpio, id: bh1750_dvi,    pin: GPIO21 }   # XIAO D3
+  - { platform: gpio, id: rf_switch_en,  pin: GPIO3 }
+  - { platform: gpio, id: rf_ant_select, pin: GPIO14 }
+
+i2c:
+  sda: GPIO22   # XIAO D4
+  scl: GPIO23   # XIAO D5
+  scan: true
+
+uart:
+  id: radar_uart
+  tx_pin: GPIO16   # XIAO D6 -> radar RX
+  rx_pin: GPIO17   # XIAO D7 <- radar TX
+  baud_rate: 256000
+  parity: NONE
+  stop_bits: 1
+
+ld2410:
+  uart_id: radar_uart
+
+binary_sensor:
+  - platform: ld2410
+    has_target:
+      name: Presence
+    has_moving_target:
+      name: Moving target
+    has_still_target:
+      name: Still target
+  - platform: gpio
+    pin: GPIO2        # XIAO D2 <- radar OUT
+    name: Presence (radar OUT pin)
+    device_class: occupancy
+    disabled_by_default: true
+  - platform: template
+    name: Window open (temperature drop)
+    device_class: window
+    lambda: |-
+      // open if the temperature fell more than 0.8 C over the last 5 minutes
+      return id(temp_drop_5min).state > 0.8;
+
+sensor:
+  - platform: sht4x
+    address: 0x44
+    update_interval: 60s
+    temperature:
+      id: room_temp
+      name: Temperature
+      filters:
+        - offset: ${temp_offset}
+    humidity:
+      name: Humidity
+
+  - platform: template
+    id: temp_drop_5min
+    name: Temperature drop (5 min)
+    unit_of_measurement: "°C"
+    accuracy_decimals: 2
+    update_interval: 60s
+    lambda: |-
+      static float hist[6] = {NAN, NAN, NAN, NAN, NAN, NAN};
+      static int i = 0;
+      float now = id(room_temp).state;
+      float old = hist[i];
+      hist[i] = now;
+      i = (i + 1) % 6;
+      if (std::isnan(old) || std::isnan(now)) return NAN;
+      return old - now;   // positive = getting colder
+
+  - platform: bh1750
+    name: Illuminance
+    address: 0x23
+    update_interval: 30s
+
+  - platform: ld2410
+    moving_distance:
+      name: Moving distance
+    still_distance:
+      name: Still distance
+    detection_distance:
+      name: Detection distance
+
+  - platform: wifi_signal
+    name: WiFi signal
+    update_interval: 60s
+
+  # Optional SCD40 CO2 module on its own I2C header (address 0x62):
+  # - platform: scd4x
+  #   co2:
+  #     name: CO2
+  #   update_interval: 60s

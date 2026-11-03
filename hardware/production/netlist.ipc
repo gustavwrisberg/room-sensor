@@ -1,0 +1,79 @@
+P  JOB   Room-Sensor-lowcost                                                    
+P  CODE  00                                                                     
+P  UNITS CUST 0                                                                 
+P  arrayDim   N                                                                 
+P  VER   IPC-D-356A                                                             
+P  IMAGE PRIMARY                                                                
+P  NNAMEM0000 unconnected-(U1-EP-Pad5)                                          
+P  NNAMEM0001 unconnected-(U2-3V3_OUT-Pad22)                                    
+P  NNAMEM0002 unconnected-(U2-BOOT-Pad21)                                       
+P  NNAMEM0003 unconnected-(U2-D0-Pad1)                                          
+P  NNAMEM0004 unconnected-(U2-D1-Pad2)                                          
+P  NNAMEM0005 unconnected-(U2-D10-Pad11)                                        
+P  NNAMEM0006 unconnected-(U2-D8-Pad9)                                          
+P  NNAMEM0007 unconnected-(U2-D9-Pad10)                                         
+P  NNAMEM0008 unconnected-(U2-EN-Pad17)                                         
+P  NNAMEM0009 unconnected-(U2-MTCK-Pad20)                                       
+P  NNAMEM000A unconnected-(U2-MTDI-Pad15)                                       
+P  NNAMEM000B unconnected-(U2-MTDO-Pad16)                                       
+P  NNAMEM000C unconnected-(U2-MTMS-Pad19)                                       
+P  NNAMEM000D unconnected-(U2-VBAT-Pad23)                                       
+327+3.3V            C11   -1          A01X+073969Y-042079X0220Y0244R270 S2      
+327+3.3V            U1    -3          A01X+073528Y-042047X0199Y0165R000 S2      
+327+3.3V            U2    -12         A01X+062251Y-043314X1083Y0787R180 S2      
+327+3.3V            U4    -1          A01X+073961Y-044252X0199Y0110R180 S2      
+327+3.3V            R9    -1          A01X+072406Y-042677X0213Y0252R180 S2      
+327+3.3V            R8    -1          A01X+072441Y-043307X0213Y0252R180 S2      
+327+3.3V            C9    -1          A01X+074579Y-044213X0220Y0244R270 S2      
+317+5V              SM1   -5    D0512PA00X+059291Y-044094X0787Y0000R090 S0      
+327+5V              U2    -14         A01X+062251Y-045314X1083Y0787R180 S2      
+327+5V              C7    -1          A01X+061102Y-045177X0394Y0571R270 S2      
+327/DVI             U2    -4          A01X+068615Y-042314X1083Y0787R180 S2      
+327/DVI             C12   -1          A01X+071149Y-043504X0220Y0244R090 S2      
+327/DVI             U4    -5          A01X+072835Y-044055X0199Y0110R180 S2      
+317/RADAR_OUT       SM1   -3    D0512PA00X+059291Y-042094X0787Y0000R090 S0      
+327/RADAR_OUT       U2    -3          A01X+068615Y-043314X1083Y0787R180 S2      
+317/RADAR_RX        SM1   -2    D0512PA00X+059291Y-041094X0787Y0000R090 S0      
+327/RADAR_RX        U2    -7          A01X+068615Y-039314X1083Y0787R180 S2      
+317/RADAR_TX        SM1   -1    D0512PA00X+059291Y-040094X0709Y0787R090 S0      
+327/RADAR_TX        U2    -8          A01X+062251Y-039314X1083Y0787R180 S2      
+327/SCL             U1    -2          A01X+072992Y-042047X0199Y0165R000 S2      
+327/SCL             U2    -6          A01X+068615Y-040314X1083Y0787R180 S2      
+327/SCL             U4    -6          A01X+072835Y-044252X0199Y0110R180 S2      
+327/SCL             R9    -2          A01X+072004Y-042677X0213Y0252R180 S2      
+327/SDA             U1    -1          A01X+072992Y-041732X0199Y0165R000 S2      
+327/SDA             U2    -5          A01X+068615Y-041314X1083Y0787R180 S2      
+327/SDA             U4    -4          A01X+072835Y-043858X0199Y0110R180 S2      
+327/SDA             R8    -2          A01X+072039Y-043307X0213Y0252R180 S2      
+317GND              VIA        MD0118PA00X+064173Y-045276X0236Y0000R000 S3      
+317GND              VIA        MD0118PA00X+063386Y-043701X0236Y0000R000 S3      
+317GND              VIA        MD0118PA00X+063583Y-040945X0236Y0000R000 S3      
+317GND              SM1   -4    D0512PA00X+059291Y-043094X0787Y0000R090 S0      
+327GND              C11   -2          A01X+073969Y-041701X0220Y0244R270 S2      
+327GND              U1    -4          A01X+073528Y-041732X0199Y0165R000 S2      
+327GND              U2    -13         A01X+062251Y-044314X1083Y0787R180 S2      
+327GND              U2    -18         A01X+064945Y-044717X0669Y0000R180 S2      
+327GND              U2    -24         A01X+065145Y-040137X0984Y0433R270 S2      
+327GND              C12   -2          A01X+071149Y-043882X0220Y0244R090 S2      
+327GND              U4    -3          A01X+073961Y-043858X0199Y0110R180 S2      
+327GND              U4    -2          A01X+073961Y-044055X0199Y0110R180 S2      
+327GND              C7    -2          A01X+061102Y-044429X0394Y0571R270 S2      
+327GND              C9    -2          A01X+074579Y-043835X0220Y0244R270 S2      
+327M0000            U1    -5          A01X+073260Y-041890X0157Y0433R000 S2      
+327M0001            U2    -22         A01X+064981Y-042739X0669Y0000R180 S2      
+327M0002            U2    -21         A01X+065945Y-042717X0669Y0000R180 S2      
+327M0003            U2    -1          A01X+068615Y-045314X1083Y0787R180 S2      
+327M0004            U2    -2          A01X+068615Y-044314X1083Y0787R180 S2      
+327M0005            U2    -11         A01X+062251Y-042314X1083Y0787R180 S2      
+327M0006            U2    -9          A01X+062251Y-040314X1083Y0787R180 S2      
+327M0007            U2    -10         A01X+062251Y-041314X1083Y0787R180 S2      
+327M0008            U2    -17         A01X+065945Y-044717X0669Y0000R180 S2      
+327M0009            U2    -20         A01X+064945Y-043717X0669Y0000R180 S2      
+327M000A            U2    -15         A01X+065945Y-045717X0669Y0000R180 S2      
+327M000B            U2    -16         A01X+064945Y-045717X0669Y0000R180 S2      
+327M000C            U2    -19         A01X+065945Y-043717X0669Y0000R180 S2      
+327M000D            U2    -23         A01X+066145Y-040137X0984Y0433R270 S2      
+367N/C              REF**      MD0866UA00X+070472Y-045512X0866Y0000R000 S0      
+367N/C              REF**      MD0866UA00X+074173Y-045512X0866Y0000R000 S0      
+367N/C              REF**      MD0866UA00X+074173Y-038740X0866Y0000R000 S0      
+999                                                                             
